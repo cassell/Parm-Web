@@ -1,0 +1,22 @@
+{
+	"name": "parm/parm-web-interface",
+	"type": "library",
+	"description": "Active Record ORM with closures and web interface",
+	"keywords": ["active record", "activerecord", "orm", "closures", "dao", "database", "mysql"],
+	"homepage": "http://github.com/cassell/ParmWebInterface",
+	"license": "BSD-2-Clause",
+	"authors": [
+		{
+			"name": "Andrew Cassell",
+			"email": "me@andrewcassell.com",
+			"homepage": "http://www.andrewcassell.com",
+			"role": "Web Application Developer"
+		}
+	],
+	"require": {
+		"parm/parm": "*"
+	},
+	"autoload": {
+		"psr-0": {"ParmWebInterface\\": "src/"}
+	}
+}
