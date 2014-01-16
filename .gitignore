@@ -2,4 +2,5 @@ composer.lock
 vendor
 nbproject
 phpunit.xml.local
+tests/local_test.php
 run_tests.sh
