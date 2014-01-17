@@ -14,6 +14,7 @@
 		}
 	],
 	"require": {
+		"mustache/mustache": "v2.3.1",
 		"parm/parm": "*"
 	},
 	"autoload": {

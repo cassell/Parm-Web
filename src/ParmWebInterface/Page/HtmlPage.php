@@ -12,13 +12,8 @@ abstract class HtmlPage
 	const TOUCH_ICON_PNG = '/img/msrc_touch_icon.png';
 	
 	// prototypes
-	function open() { }
-	function close() { }
-	
-	function __construct()
-	{
-		
-	}
+	abstract function open();
+	abstract function close();
 	
 	function insertScript($scriptName)
 	{
@@ -45,7 +40,7 @@ abstract class HtmlPage
 	{
 		if($array != null)
 		{
-			$this->insertJavaScriptBlock('var ' . $variableName . ' = ' . Util::jsonEncode($array) . ';');
+			$this->insertJavaScriptBlock('var ' . $variableName . ' = ' . self::toJSONString($array) . ';');
 		}
 		else
 		{
@@ -86,8 +81,6 @@ abstract class HtmlPage
 		
 		echo '</head>';
 		
-		$this->printAnalytics();
-
 		echo '<body onunload="">';  // onunload forces the browser to reload the page when the back button is pressed (Safari back button issue)
 									// See:
 									// http://stackoverflow.com/questions/5297122/preventing-cache-on-back-button-in-safari-5
