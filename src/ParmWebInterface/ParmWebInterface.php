@@ -13,18 +13,17 @@ class ParmWebInterface
 	
 	function init()
 	{
-		if(array_key_exists('R', $_POST) && filter_input('R', $_POST) == "AJAX")
+		if(array_key_exists('api', $_POST) && filter_input(INPUT_POST,'api') != "")
 		{
 			// this is a JSON request for an API call
+			
+			
+			
 		}
 		else
 		{
 			$page = new Page\ParmWebInterfacePage();
-			$page->open();
-			
-			
-			
-			$page->close();
+			$page->display();
 		}
 		
 		

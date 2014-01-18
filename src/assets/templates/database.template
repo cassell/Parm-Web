@@ -1,0 +1,12 @@
+<script type="text/x-handlebars" data-template-name="database">
+	<h1>{{#linkTo index}}Databases{{/linkTo}} &raquo; {{databaseName}}</h1>
+	<div class="navbar" id="list-of-tables-navbar">
+		<div class="navbar-inner">
+			<form class="navbar-search pull-left" onsubmit="return false;">
+				<input type="text" class="search-query" placeholder="Search for Table">
+			</form>
+			{{#linkTo databaseGenerate content class="btn"}}<i class="icon-refresh"></i> Regenerate{{/linkTo}}
+		</div>
+	</div>
+	{{render databaseTables tables}}
+</script>

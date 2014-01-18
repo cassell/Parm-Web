@@ -1,0 +1,8 @@
+<script type="text/x-handlebars" data-template-name="index">
+	<h1>Databases</h1>
+	<ul class="nav nav-tabs nav-stacked larger-nav-stacked white">
+		{{#each db in dbs}}
+			<li>{{#linkTo database db}}<img src="/img/icons/db_32.png"> {{db.databaseName}}{{/linkTo}}</li>
+		{{/each}}
+	</ul>
+</script>
