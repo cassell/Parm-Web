@@ -17,48 +17,64 @@
 				data : data,
 				dataType: 'json',
 				type: 'POST'
-			}
-		}
+			};
+		};
 		
 		Parm.Model =  Ember.Object.extend();
 		
-		Parm.Database = Parm.Model.extend();
-		
-		Parm.Database.reopenClass(
+		Parm.ParmConfig = Parm.Model.extend();
+		Parm.ParmConfig.reopenClass(
 		{
-			databaseName: null,
-			
-			findAll: function()
+			getConfig: function()
 			{
 				return Ember.$.ajax("",Parm.getAjaxData('databases')).then(function(data) {
 					
-					return data.databases;
+					var databases = Ember.A();
 					
-//					var databases = Ember.A();
-//					
-//					$.each(data.databases,function(index,db)
-//					{
-//						databases.push(Parm.Database.create({'databaseName' : db.databaseName }));
-//					})
-//					
-//					return databases;
+					$.each(data.databases,function(index,db)
+					{
+						databases.push(Parm.Database.create({'databaseName' : db.databaseName }));
+					})
+					
+					return databases;
 				});
 			}
 			
 		});
 		
-		Parm.IndexRoute = Ember.Route.extend({
-			
-//			setupController: function(controller, model)
-//			{
-//				this.controller = controller;
-//				model = ["One","Two"];
-//			},
-			
-			model: function() {
+		
+		Parm.Database = Parm.Model.extend();
+		
+		Parm.Database.reopenClass(
+		{
+			getTables: function(databaseName)
+			{
+				var tables = Ember.A();
 				
-				return Parm.Database.findAll();
+				console.log("Parm.Database:getTables");
+				console.log(tables);
+				
+				Ember.$.ajax("",Parm.getAjaxData('tables',{'database' : databaseName })).then(function(data) {
+					
+					tables.push({"tableName" : "One"});
+					tables.push({"tableName" : "One"});
+					tables.push({"tableName" : "One"});
+					
+					console.log(tables);
+//					
+//					return [{"tableName" : "One"},{"tableName" : "Two"},{"tableName" : "Three"},{"tableName" : "Four"}];
+//					//return data.tables;
+				}.bind(tables));
+				
+//				return Ember.$.ajax("",Parm.getAjaxData('tables',{'database' : databaseName })).then(function(data) {
+//					
+//					return [{"tableName" : "One"},{"tableName" : "Two"},{"tableName" : "Three"},{"tableName" : "Four"}];
+//					//return data.tables;
+//				});
+				
+				return tables;
 			}
+			
 		});
 		
 		Parm.Router.map(function() {
@@ -69,11 +85,51 @@
 			
 		});
 		
+		Parm.IndexRoute = Ember.Route.extend({
+			
+			model: function() {
+				
+				return Parm.ParmConfig.getConfig();
+			}
+			
+		});
+		
+		
+		
+		
+		
+		Parm.DatabaseRoute = Ember.Route.extend({
+			
+//			beforeModel: function(transition,queryParams) {
+//				
+//				
+//				console.log("DatabaseRoute:beforeModel");
+//				console.log(transition);
+//				console.log(queryParams);
+//			},
+			
+			
+			model: function(params) {
+				
+				console.log("DatabaseRoute:model");
+				
+				var model =  Parm.Database.create({'databaseName' : params.databaseName});
+				
+				model.tables = Parm.Database.getTables(model.databaseName);
+				
+				return model;
+				
+				
+//				return Ember.$.ajax("",Parm.getAjaxData('tables',{'database' : params.databaseName })).then(function(data) {
+//					return Parm.Database.create({'databaseName' : params.databaseName , 'tables' : data.tables });
+//				});
+			}
+			
+			
+		});
+		
 		
 		
 	});
 
 }(window.jQuery, window, document));
-
-// drop a {{debug}} in your template and get a nice output to your console
-//Handlebars.registerHelper("debug", function(optionalValue) {console.log("Current Context");console.log("====================");console.log(this);if (optionalValue) {console.log("Value");console.log("====================");console.log(optionalValue);}});
