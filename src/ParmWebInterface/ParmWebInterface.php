@@ -4,19 +4,31 @@ namespace ParmWebInterface;
 
 class ParmWebInterface
 {
-	private $config;
+	private $config = array();
 	
-	function __construct(Array $config)
+	function __construct()
 	{
-		$this->config = $config;
+	}
+	
+	function addDatabase($logicalName, \Parm\Database $database, \Parm\Generator\DatabaseGenerator $generator)
+	{
+		$this->config[$logicalName] = array("database" => $database, "generator" => $generator);
 	}
 	
 	function init()
 	{
 		if(array_key_exists('api', $_POST) && filter_input(INPUT_POST,'api') != "")
 		{
-			// this is a JSON request for an API call
+			header("Content-Type: application/json");
 			
+			// this is a JSON request for an API call
+			switch(filter_input(INPUT_POST,'api')):
+
+				case 'databases':	$this->returnListOfDatabases(); break;
+				
+				case 'tables':	$this->returnListOfTables(filter_input(INPUT_POST,'database')); break;
+				
+			endswitch;
 			
 			
 		}
@@ -30,6 +42,27 @@ class ParmWebInterface
 		
 
 		
+	}
+	
+	function returnListOfDatabases()
+	{
+		$databases = array();
+		foreach(array_keys($this->config) as $dbName)
+		{
+			$databases[] = array("databaseName" => $dbName);
+		}
+		
+		echo '{ "databases" : ' . self::toJSONString($databases) . ' } ';
+	}
+	
+	function returnListOfTables()
+	{
+		$databases = array();
+		$databases[] = array("tableName" => "Table1");
+		$databases[] = array("tableName" => "Table2");
+		$databases[] = array("tableName" => "Table3");
+		
+		echo '{ "tables" : ' . self::toJSONString($databases) . ' } ';
 	}
 	
 	/**

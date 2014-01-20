@@ -17,6 +17,7 @@ class ParmWebInterfacePage extends HtmlPage
 		
 		foreach($scripts as $script)
 		{
+			// ember.js causes an error with </script>
 			$this->insertJavaScriptBlock(str_replace("</script>","</ script>",file_get_contents($script)));
 		}
 		
@@ -73,7 +74,7 @@ class ParmWebInterfacePage extends HtmlPage
 		
 		echo '<div id="parm-footer" class="container clearfix">';
 			echo '<div class="row">';
-				echo '<div class="col-lg-6">';
+				echo '<div class="col-lg-12">';
 					echo '<p>&copy; <a href="http://www.andrewcassell.com">Andrew Cassell</a>. View this project on <a href="https://github.com/cassell/SQLicious">Github</a>. Built with <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>, <a href="http://emberjs.com/">Ember.js</a>, and <a href="http://jquery.com/">jQuery</a>. Icons from <a href="http://fortawesome.github.com/Font-Awesome/">Font&nbsp;Awesome</a></p>';
 				echo '</div>';
 			

@@ -1,12 +1,27 @@
 <script type="text/x-handlebars" data-template-name="database">
-	<h1>{{#linkTo index}}Databases{{/linkTo}} &raquo; {{databaseName}}</h1>
-	<div class="navbar" id="list-of-tables-navbar">
-		<div class="navbar-inner">
-			<form class="navbar-search pull-left" onsubmit="return false;">
-				<input type="text" class="search-query" placeholder="Search for Table">
+	
+	<h1>{{#link-to "index"}}Databases{{/link-to}} &raquo; {{databaseName}}</h1>
+	<div class="well clearfix">
+		<div class="row">
+		<div class="col-lg-10 col-md-9 col-sm-9 col-xs-8">
+			<form class ="" role="search">
+				<div class="form-group" style="margin-bottom: 0;">
+					<input type="text" class="form-control" placeholder="Search" style="width: 100%;">
+				</div>
 			</form>
-			{{#linkTo databaseGenerate content class="btn"}}<i class="icon-refresh"></i> Regenerate{{/linkTo}}
+		</div>
+		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
+			<button type="button" class="btn btn-default pull-right" style="margin-right:10px;">Generate</button>
+		</div>
 		</div>
 	</div>
-	{{render databaseTables tables}}
+	<div class="list-group">
+		<a href="" class="list-group-item">==</a>
+		{{#each tables}}
+			<a href="" class="list-group-item">--
+					{{tableName}}
+			</a>
+		{{/each}}
+	</div>
+	
 </script>
