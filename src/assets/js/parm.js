@@ -48,13 +48,13 @@
 		
 		Parm.DatabaseRoute = Ember.Route.extend({
 			
-			setupController: function(controller, post) {
-				
-				this._super(controller, post);
-//				this.controller = controller;
-//				this.model({"fuck":"this"});
-				//this.controllerFor('posts').set('currentPost', post);
-			},
+//			setupController: function(controller, post) {
+//				
+//				this._super(controller, post);
+////				this.controller = controller;
+////				this.model({"fuck":"this"});
+//				//this.controllerFor('posts').set('currentPost', post);
+//			},
 			
 			model: function(params) {
 				
@@ -64,7 +64,6 @@
 					model.databaseName = params.databaseName;
 					model.tables = data.tables;
 					return model;
-					
 				});
 				
 			},

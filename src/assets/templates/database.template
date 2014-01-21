@@ -16,9 +16,8 @@
 		</div>
 	</div>
 	<div class="list-group">
-		<a href="" class="list-group-item">==</a>
 		{{#each tables}}
-			<a href="" class="list-group-item">--
+			<a href="" class="list-group-item">
 					{{tableName}}
 			</a>
 		{{/each}}

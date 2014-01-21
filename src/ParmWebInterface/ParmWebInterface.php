@@ -102,14 +102,26 @@ class ParmWebInterface
 		echo '{ "databases" : ' . self::toJSONString($databases) . ' } ';
 	}
 	
-	function returnListOfTables()
+	function returnListOfTables($databaseName)
 	{
 		$databases = array();
-		$databases[] = array("tableName" => "Table1");
-		$databases[] = array("tableName" => "Table2");
-		$databases[] = array("tableName" => "Table3");
 		
-		echo '{ "tables" : ' . self::toJSONString($databases) . ' } ';
+		$dp = new \Parm\DatabaseProcessor($this->config[$databaseName]["database"]->getMaster());
+		$dp->setSQL('SHOW TABLES');
+		
+		$tableNames = array();
+		
+		$dp->process(function($row) use(&$tableNames,$databaseName) {
+			
+			$tableNames[] = array("tableName" => $row['Tables_in_'.$databaseName]);
+		});
+		
+		
+//		$databases[] = array("tableName" => "Table1");
+//		$databases[] = array("tableName" => "Table2");
+//		$databases[] = array("tableName" => "Table3");
+		
+		echo '{ "tables" : ' . self::toJSONString($tableNames) . ' } ';
 	}
 	
 	/**
