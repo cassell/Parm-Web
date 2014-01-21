@@ -14,6 +14,10 @@
 				path: '/database/:databaseName'
 			});
 			
+			this.route('databaseGenerate', {
+				path: '/database/:databaseName/generate'
+			});
+			
 		});
 		
 		Parm.getAjaxData = function(api,params)
@@ -64,6 +68,7 @@
 					model.databaseName = params.databaseName;
 					model.tables = data.tables;
 					return model;
+					
 				});
 				
 			},
@@ -81,69 +86,6 @@
 			
 		});
 		
-//		Parm.Model =  Ember.Object.extend();
-
-//		Parm.StationListController = Ember.ObjectController.extend({
-		
-//		Parm.ParmConfig =  Ember.Object.extend();
-//		Parm.ParmConfig.reopenClass(
-//		{
-//			getConfig: function()
-//			{
-//				return Ember.$.ajax("",Parm.getAjaxData('databases')).then(function(data) {
-//					
-//					var config = Parm.ParmConfig.create();
-//					
-//					config.databases = Ember.A();
-//					
-//					$.each(data.databases,function(index,db)
-//					{
-//						config.databases.push(Parm.Database.create({'databaseName' : db.databaseName }));
-//					})
-//					
-//					config.databases.arrayContentDidChange();
-//					
-//					return config;
-//				});
-//			}
-//		});
-		
-		
-		
-//		Parm.Db = Parm.Model.extend();
-//		Parm.Db.reopenClass(
-//		{
-//			getTables: function(database)
-//			{
-//				return Ember.$.ajax("",Parm.getAjaxData('tables',{'database' : database.databaseName })).then(function(data) {
-//					
-//					$.each(data.tables,function(index,table) {
-//						
-//						database.tables.push(table);
-//					});
-//					
-//					database.tables.arrayContentDidChange();
-//				});
-//			}
-//			
-//		});
-//		
-////		Parm.Table = Parm.Model.extend();
-//		
-//		
-//		
-//		
-//		
-//		Parm.DatabaseRoute = Ember.Route.extend({
-//			
-//			model: function(params) {
-//				
-//				var model =  Parm.Db.create({'databaseName' : params.databaseName, 'tables' : Ember.A()});
-//				Parm.Db.getTables(model);
-//				return model;
-//			}
-//			
-//		});
 		
 		
 		

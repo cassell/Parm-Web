@@ -1,6 +1,7 @@
 #parm-header
 {
-	padding-top: 10px;
+	padding-top: 30px;
+	padding-bottom: 10px;
 }
 
 #parm-header img
@@ -19,5 +20,13 @@
 
 #parm-footer
 {
-	padding-top: 300px;
+	padding: 10px 10px 0 20px;
+	margin-top: 300px;
+	color: #ddd;
+	border: 1px solid #eee;
+}
+
+#parm-footer a
+{
+	color: #BBDCF8;
 }

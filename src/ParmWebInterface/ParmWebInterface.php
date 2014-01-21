@@ -62,6 +62,7 @@ class ParmWebInterface
 			// templates
 			$templates[] = dirname(dirname(__FILE__)) . '/assets/templates/index.template';
 			$templates[] = dirname(dirname(__FILE__)) . '/assets/templates/database.template';
+			$templates[] = dirname(dirname(__FILE__)) . '/assets/templates/databaseGenerate.template';
 			
 			$page->open();
 			

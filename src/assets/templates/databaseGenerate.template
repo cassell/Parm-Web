@@ -1,0 +1,5 @@
+<script type="text/x-handlebars" data-template-name="databaseGenerate">
+	
+	<h1>{{#link-to "index"}}Databases{{/link-to}} &raquo; {{#link-to "database" databaseName}}{{databaseName}}{{/link-to}} &raquo; Generating...</h1>
+	
+</script>

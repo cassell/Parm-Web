@@ -4,10 +4,8 @@ namespace ParmWebInterface\Page;
 
 class ParmWebInterfacePage extends HtmlPage
 {
-	
 	function __construct()
 	{
-		
 		
 	}
 	
@@ -20,7 +18,6 @@ class ParmWebInterfacePage extends HtmlPage
 	function open()
 	{
 		$this->printHtmlHeader();
-		
 		
 		echo '<div id="parm-header" class="container clearfix">';
 		
