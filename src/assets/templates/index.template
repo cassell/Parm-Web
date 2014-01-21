@@ -1,7 +1,7 @@
 <script type="text/x-handlebars" data-template-name="index">
 	<h1>Databases</h1>
 	<div class="list-group">
-		{{#each}}
+		{{#each databases}}
 			{{#link-to "database" this class="list-group-item"}}
 					{{databaseName}}
 				{{/link-to}}

@@ -35,12 +35,59 @@ class ParmWebInterface
 		else
 		{
 			$page = new Page\ParmWebInterfacePage();
-			$page->display();
+			$page->insertJavascriptData($this->getDatabases(), 'config');
+			
+			// js
+			$scripts = array();
+			$scripts[] = dirname(dirname(__FILE__)) . '/assets/js/jquery.js';
+			$scripts[] = dirname(dirname(__FILE__)) . '/assets/js/handlebars.js';
+			$scripts[] = dirname(dirname(__FILE__)) . '/assets/js/ember.js';
+			$scripts[] = dirname(dirname(__FILE__)) . '/assets/js/parm.js';
+
+			foreach($scripts as $script)
+			{
+				// ember.js causes an error with </script>
+				$page->insertJavaScriptBlock(str_replace("</script>","</ script>",file_get_contents($script)));
+			}
+
+			// css
+			$css = array();
+			$css[] = dirname(dirname(__FILE__)) . '/assets/css/bootstrap.css';
+			$css[] = dirname(dirname(__FILE__)) . '/assets/css/parm.css';
+			foreach($css as $styleSheet)
+			{
+				$page->insertStyleBlock(file_get_contents($styleSheet));
+			}
+			
+			// templates
+			$templates[] = dirname(dirname(__FILE__)) . '/assets/templates/index.template';
+			$templates[] = dirname(dirname(__FILE__)) . '/assets/templates/database.template';
+			
+			$page->open();
+			
+			foreach($templates as $template)
+			{
+				echo file_get_contents($template);
+			}
+			
+			$page->close();
+			
 		}
 		
 		
 		
 
+		
+	}
+	
+	private function getDatabases()
+	{
+		$databases = array();
+		foreach(array_keys($this->config) as $dbName)
+		{
+			$databases[] = array("databaseName" => $dbName);
+		}
+		return $databases;
 		
 	}
 	

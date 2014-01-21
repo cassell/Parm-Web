@@ -4,35 +4,10 @@ namespace ParmWebInterface\Page;
 
 class ParmWebInterfacePage extends HtmlPage
 {
-	private $templates = array();
 	
 	function __construct()
 	{
-		// js
-		$scripts = array();
-		$scripts[] = dirname(dirname(dirname(__FILE__))) . '/assets/js/jquery.js';
-		$scripts[] = dirname(dirname(dirname(__FILE__))) . '/assets/js/handlebars.js';
-		$scripts[] = dirname(dirname(dirname(__FILE__))) . '/assets/js/ember.js';
-		$scripts[] = dirname(dirname(dirname(__FILE__))) . '/assets/js/parm.js';
 		
-		foreach($scripts as $script)
-		{
-			// ember.js causes an error with </script>
-			$this->insertJavaScriptBlock(str_replace("</script>","</ script>",file_get_contents($script)));
-		}
-		
-		// css
-		$css = array();
-		$css[] = dirname(dirname(dirname(__FILE__))) . '/assets/css/bootstrap.css';
-		$css[] = dirname(dirname(dirname(__FILE__))) . '/assets/css/parm.css';
-		foreach($css as $styleSheet)
-		{
-			$this->insertStyleBlock(file_get_contents($styleSheet));
-		}
-		
-		// templates
-		$this->templates[] = dirname(dirname(dirname(__FILE__))) . '/assets/templates/index.template';
-		$this->templates[] = dirname(dirname(dirname(__FILE__))) . '/assets/templates/database.template';
 		
 	}
 	
@@ -46,10 +21,6 @@ class ParmWebInterfacePage extends HtmlPage
 	{
 		$this->printHtmlHeader();
 		
-		foreach($this->templates as $template)
-		{
-			echo file_get_contents($template);
-		}
 		
 		echo '<div id="parm-header" class="container clearfix">';
 		

@@ -29,53 +29,41 @@
 			{
 				return Ember.$.ajax("",Parm.getAjaxData('databases')).then(function(data) {
 					
-					var databases = Ember.A();
+					var config = Parm.ParmConfig.create();
+					
+					config.databases = Ember.A();
 					
 					$.each(data.databases,function(index,db)
 					{
-						databases.push(Parm.Database.create({'databaseName' : db.databaseName }));
+						config.databases.push(Parm.Database.create({'databaseName' : db.databaseName }));
 					})
 					
-					return databases;
+					config.databases.arrayContentDidChange();
+					
+					return config;
+				});
+			}
+		});
+		
+		Parm.Database = Parm.Model.extend();
+		Parm.Database.reopenClass(
+		{
+			getTables: function(database)
+			{
+				return Ember.$.ajax("",Parm.getAjaxData('tables',{'database' : database.databaseName })).then(function(data) {
+					
+					$.each(data.tables,function(index,table) {
+						
+						database.tables.push(Parm.Table.create(table));
+					});
+					
+					database.tables.arrayContentDidChange();
 				});
 			}
 			
 		});
 		
-		
-		Parm.Database = Parm.Model.extend();
-		
-		Parm.Database.reopenClass(
-		{
-			getTables: function(databaseName)
-			{
-				var tables = Ember.A();
-				
-				console.log("Parm.Database:getTables");
-				console.log(tables);
-				
-				Ember.$.ajax("",Parm.getAjaxData('tables',{'database' : databaseName })).then(function(data) {
-					
-					tables.push({"tableName" : "One"});
-					tables.push({"tableName" : "One"});
-					tables.push({"tableName" : "One"});
-					
-					console.log(tables);
-//					
-//					return [{"tableName" : "One"},{"tableName" : "Two"},{"tableName" : "Three"},{"tableName" : "Four"}];
-//					//return data.tables;
-				}.bind(tables));
-				
-//				return Ember.$.ajax("",Parm.getAjaxData('tables',{'database' : databaseName })).then(function(data) {
-//					
-//					return [{"tableName" : "One"},{"tableName" : "Two"},{"tableName" : "Three"},{"tableName" : "Four"}];
-//					//return data.tables;
-//				});
-				
-				return tables;
-			}
-			
-		});
+		Parm.Table = Parm.Model.extend();
 		
 		Parm.Router.map(function() {
 			
@@ -94,28 +82,16 @@
 			
 		});
 		
-		
-		
-		
-		
 		Parm.DatabaseRoute = Ember.Route.extend({
-			
-//			beforeModel: function(transition,queryParams) {
-//				
-//				
-//				console.log("DatabaseRoute:beforeModel");
-//				console.log(transition);
-//				console.log(queryParams);
-//			},
-			
 			
 			model: function(params) {
 				
-				console.log("DatabaseRoute:model");
+				var model =  Parm.Database.create({'databaseName' : params.databaseName, 'tables' : Ember.A()});
+				Parm.Database.getTables(model);
+				setTimeout(function(){ console.log(model.tables); },3000);
 				
-				var model =  Parm.Database.create({'databaseName' : params.databaseName});
-				
-				model.tables = Parm.Database.getTables(model.databaseName);
+				//model.tables = Parm.Database.getTables(model.databaseName);
+//				console.log(model.tables);
 				
 				return model;
 				

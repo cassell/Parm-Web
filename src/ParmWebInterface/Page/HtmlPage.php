@@ -93,4 +93,30 @@ abstract class HtmlPage
 		echo '</html>';
 	}
 	
+	/**
+	 * Convert to a JSON string
+     * @return string The row formatted in JSON
+     */
+	static function toJSONString(Array $array)
+	{
+		return json_encode(self::utf8EncodeArray($array));
+	}
+	
+	static protected function utf8EncodeArray(Array $array)
+	{
+		foreach ($array as $key => $value)
+		{
+			if (is_array($value))
+			{
+				$array[$key] = self::utf8EncodeArray($value);
+			}
+			else
+			{
+				$array[$key] = utf8_encode($value);
+			}
+		}
+
+		return $array;
+	}
+	
 }
