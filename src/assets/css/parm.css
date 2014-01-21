@@ -30,3 +30,20 @@
 {
 	color: #BBDCF8;
 }
+
+.parm-generating-pacman
+{
+	padding: 30px 0;
+}
+
+
+@media (min-width: 900px)
+{
+	.parm-generating-pacman
+	{
+		font-size: 2em;
+		text-align: center;
+	}
+	
+	
+}
