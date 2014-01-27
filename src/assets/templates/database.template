@@ -6,18 +6,13 @@
 		<li class="active">{{databaseName}}</li>
 	</ol>
 	<div class="well clearfix">
-		<div class="row">
-		<div class="col-lg-10 col-md-9 col-sm-9 col-xs-8">
-			<form class ="" role="search">
-				<div class="form-group" style="margin-bottom: 0;">
-					<input type="text" class="form-control" placeholder="Search" style="width: 100%;">
-				</div>
-			</form>
-		</div>
-		<div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
-			{{#link-to "databaseGenerate" databaseName class="btn btn-default pull-right" style="margin-right:10px;"}}Generate{{/link-to}}
-		</div>
-		</div>
+		{{#link-to "databaseGenerate" databaseName class="btn btn-default" style="margin-right:10px;"}}Generate{{/link-to}}
+		<div style="display: inline-block; padding-right:10px;"></div>
+		<form class ="" role="search" style="display: inline-block;">
+			<div class="form-group" style="margin-bottom: 0;">
+				<input type="text" class="form-control" placeholder="Search" style="width: 100%;">
+			</div>
+		</form>
 	</div>
 	<div class="list-group">
 		{{#each tables}}
