@@ -6,19 +6,17 @@
 		<li class="active">{{databaseName}}</li>
 	</ol>
 	<div class="well clearfix">
-		{{#link-to "databaseGenerate" databaseName class="btn btn-default" style="margin-right:10px;"}}Generate{{/link-to}}
+		{{#link-to "databaseGenerate" databaseName class="btn btn-default" style="margin-right:10px;"}}Generate Objects{{/link-to}}
 		<div style="display: inline-block; padding-right:10px;"></div>
-		<form class ="" role="search" style="display: inline-block;">
+		<form class="parm-database-search" role="search" style="">
 			<div class="form-group" style="margin-bottom: 0;">
-				<input type="text" class="form-control" placeholder="Search" style="width: 100%;">
+				<input type="text" class="form-control" placeholder="Search Tables">
 			</div>
 		</form>
 	</div>
 	<div class="list-group">
 		{{#each tables}}
-			<a href="" class="list-group-item">
-					{{tableName}}
-			</a>
+			{{#link-to "table" this class="list-group-item"}}{{tableName}}{{/link-to}}
 		{{/each}}
 	</div>
 	

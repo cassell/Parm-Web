@@ -36,6 +36,11 @@
 	padding: 30px 0;
 }
 
+.parm-database-search
+{
+	margin-top: 10px;
+}
+
 
 @media (min-width: 900px)
 {
@@ -45,5 +50,11 @@
 		text-align: center;
 	}
 	
+	.parm-database-search
+	{
+		display: inline-block;
+		float:right;
+		margin-top: 0;
+	}
 	
 }

@@ -1,0 +1,15 @@
+<script type="text/x-handlebars" data-template-name="table">
+	
+	<h1>Table Options</h1>
+	<ol class="breadcrumb">
+		<li>{{#link-to "index"}}Databases{{/link-to}}</li>
+		<li>{{#link-to "database" databaseName}}{{databaseName}}{{/link-to}}</li>
+		<li class="active">{{tableName}}</li>
+	</ol>
+	<div class="list-group">
+		<a class="list-group-item" href="">Option 1</a>
+		<a class="list-group-item" href="">Option 2</a>
+		<a class="list-group-item" href="">Option 3</a>
+	</div>
+	
+</script>

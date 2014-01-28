@@ -28,6 +28,8 @@ class ParmWebInterface
 				
 				case 'tables':	$this->returnListOfTables(filter_input(INPUT_POST,'database')); break;
 				
+				case 'table':	$this->returnTableInfo(filter_input(INPUT_POST,'database'),filter_input(INPUT_POST,'table')); break;
+				
 			endswitch;
 			
 			
@@ -63,6 +65,7 @@ class ParmWebInterface
 			$templates[] = dirname(dirname(__FILE__)) . '/assets/templates/index.template';
 			$templates[] = dirname(dirname(__FILE__)) . '/assets/templates/database.template';
 			$templates[] = dirname(dirname(__FILE__)) . '/assets/templates/databaseGenerate.template';
+			$templates[] = dirname(dirname(__FILE__)) . '/assets/templates/table.template';
 			
 			$page->open();
 			
@@ -105,8 +108,6 @@ class ParmWebInterface
 	
 	function returnListOfTables($databaseName)
 	{
-		$databases = array();
-		
 		$dp = new \Parm\DatabaseProcessor($this->config[$databaseName]["database"]->getMaster());
 		$dp->setSQL('SHOW TABLES');
 		
@@ -114,15 +115,15 @@ class ParmWebInterface
 		
 		$dp->process(function($row) use(&$tableNames,$databaseName) {
 			
-			$tableNames[] = array("tableName" => $row['Tables_in_'.$databaseName]);
+			$tableNames[] = array("tableName" => $row['Tables_in_'.$databaseName], "databaseName" => $databaseName);
 		});
 		
-		
-//		$databases[] = array("tableName" => "Table1");
-//		$databases[] = array("tableName" => "Table2");
-//		$databases[] = array("tableName" => "Table3");
-		
 		echo '{ "tables" : ' . self::toJSONString($tableNames) . ' } ';
+	}
+	
+	function returnTableInfo($databaseName,$tableName)
+	{
+		echo '{ "databaseName" : "' . $databaseName . '", "tableName" : "' . $tableName . '", "info" : {} }';
 	}
 	
 	/**

@@ -18,6 +18,22 @@
 				path: '/database/:databaseName/generate'
 			});
 			
+			this.route('table', {
+				path: '/database/:databaseName/table/:tableName'
+			});
+			
+			this.route('objectCreation', {
+					path: '/database/:databaseName/table/:tableName/objectCreation'
+			});
+
+			this.route('structure', {
+					path: '/database/:databaseName/table/:tableName/structure'
+			});
+
+			this.route('extended', {
+					path: '/database/:databaseName/table/:tableName/extendedStub'
+			});
+
 		});
 		
 		Parm.getAjaxData = function(api,params)
@@ -52,14 +68,6 @@
 		
 		Parm.DatabaseRoute = Ember.Route.extend({
 			
-//			setupController: function(controller, post) {
-//				
-//				this._super(controller, post);
-////				this.controller = controller;
-////				this.model({"fuck":"this"});
-//				//this.controllerFor('posts').set('currentPost', post);
-//			},
-			
 			model: function(params) {
 				
 				return Ember.$.ajax("",Parm.getAjaxData('tables',{'database' : params.databaseName })).then(function(data) {
@@ -82,6 +90,40 @@
 			serialize: function(model) {
 				
 				return { "databaseName" : model.databaseName };
+			}
+			
+		});
+		
+		Parm.TableController = Ember.ObjectController.extend({
+			databaseName: "",
+			tableName: ""
+		});
+		
+		
+		Parm.TableRoute = Ember.Route.extend({
+			
+			model: function(params) {
+				
+				return Ember.$.ajax("",Parm.getAjaxData('table',{'database' : params.databaseName,'table' : params.tableName })).then(function(data) {
+					
+					var model = {};
+					model.databaseName = data.databaseName;
+					model.tableName = data.tableName;
+					return model;
+					
+				});
+				
+			},
+			
+			afterModel: function(model)
+			{
+				this.controllerFor('table').set("databaseName",model.databaseName);
+				this.controllerFor('table').set("tableName",model.tableName);
+			},
+			
+			serialize: function(model) {
+				
+				return { "databaseName" : model.databaseName, "tableName" : model.tableName };
 			}
 			
 		});
