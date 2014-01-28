@@ -4,12 +4,8 @@
 	<ol class="breadcrumb">
 		<li>{{#link-to "index"}}Databases{{/link-to}}</li>
 		<li>{{#link-to "database" databaseName}}{{databaseName}}{{/link-to}}</li>
-		<li class="active">{{tableName}}</li>
+		<li>{{#link-to "table" this}}{{tableName}}{{/link-to}}</li>
+		<li class="active">Object Creation</li>
 	</ol>
-	<div class="list-group">
-		{{#link-to "creation" this class="list-group-item"}}Object Creation{{/link-to}}
-		{{#link-to "structure" this class="list-group-item"}}Table Structure{{/link-to}}
-		{{#link-to "extended" this class="list-group-item"}}Extended Object Stub{{/link-to}}
-	</div>
 	
 </script>
