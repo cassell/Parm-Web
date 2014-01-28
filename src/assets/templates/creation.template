@@ -1,4 +1,4 @@
-<script type="text/x-handlebars" data-template-name="table">
+<script type="text/x-handlebars" data-template-name="creation">
 	
 	<h1>Table Options</h1>
 	<ol class="breadcrumb">
