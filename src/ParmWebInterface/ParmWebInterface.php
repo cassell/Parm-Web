@@ -6,10 +6,6 @@ class ParmWebInterface
 {
 	private $config = array();
 	
-	function __construct()
-	{
-	}
-	
 	function addDatabase($logicalName, \Parm\Database $database, \Parm\Generator\DatabaseGenerator $generator)
 	{
 		$this->config[$logicalName] = array("database" => $database, "generator" => $generator);
@@ -26,9 +22,13 @@ class ParmWebInterface
 
 				case 'databases':	$this->returnListOfDatabases(); break;
 				
+				case 'generate': $this->generateDatabase(filter_input(INPUT_POST,'database')); break;
+				
 				case 'tables':	$this->returnListOfTables(filter_input(INPUT_POST,'database')); break;
 				
 				case 'table':	$this->returnTableInfo(filter_input(INPUT_POST,'database'),filter_input(INPUT_POST,'table')); break;
+				
+				
 				
 			endswitch;
 			
@@ -122,6 +122,13 @@ class ParmWebInterface
 		});
 		
 		echo '{ "tables" : ' . self::toJSONString($tableNames) . ' } ';
+	}
+	
+	function generateDatabase($databaseName)
+	{
+		$this->config[$databaseName]["generator"]->generate();
+				
+		echo '{ "success" : 1 }';
 	}
 	
 	function returnTableInfo($databaseName,$tableName)

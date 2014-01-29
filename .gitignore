@@ -3,4 +3,5 @@ vendor
 nbproject
 phpunit.xml.local
 tests/local_test.php
+tests/dao
 run_tests.sh

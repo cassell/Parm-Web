@@ -94,6 +94,40 @@
 			
 		});
 		
+		Parm.DatabaseGenerateController = Ember.ObjectController.extend({
+			databaseName: "",
+		});
+		
+		Parm.DatabaseGenerateRoute = Ember.Route.extend({
+			
+			model: function(params) {
+				
+				return Ember.$.ajax("",Parm.getAjaxData('generate',{'database' : params.databaseName })).then(function(data) {
+					
+					var model = {};
+					model.databaseName = params.databaseName;
+					return model;
+					
+				});
+				
+			},
+			
+			afterModel: function(model)
+			{
+				setTimeout(function(){
+					this.transitionTo('database',model.databaseName)
+				}.bind(this),3000);
+				//this.transitionTo('database',model);
+			},
+			
+			serialize: function(model) {
+				
+				return { "databaseName" : model.databaseName };
+			}
+			
+		});
+		
+		
 		Parm.TableController = Ember.ObjectController.extend({
 			databaseName: "",
 			tableName: ""
