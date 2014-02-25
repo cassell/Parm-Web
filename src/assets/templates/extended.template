@@ -13,7 +13,7 @@
 	<pre>
 &lt;?php
 
-class {{className}} extends \\{{namespace}}\EmailDaoObject
+{{#if namespace}}class {{className}} extends \\{{namespace}}\\{{className}}DaoObject{{else}}class {{className}} extends {{className}}DaoObject{{/if}}
 {
 	function __construct(Array $row = null)
 	{
@@ -31,7 +31,7 @@ class {{className}} extends \\{{namespace}}\EmailDaoObject
 	<pre>
 &lt;?php
 
-class {{className}}Factory extends \\{{namespace}}\EmailEmailDaoFactory
+{{#if namespace}}class {{className}}Factory extends \\{{namespace}}\\{{className}}DaoFactory{{else}}class {{className}} extends {{className}}DaoFactory{{/if}}
 {
 	function __construct(DatabaseNode $databaseNode = null)
 	{
