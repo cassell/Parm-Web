@@ -21,7 +21,7 @@ abstract class HtmlPage
 	
 	function insertStyleSheet($styleSheet)
 	{
-		$this->styleSheets[] = '<link rel="stylesheet" href="' . s$styleSheet . '" type="text/css" />';
+		$this->styleSheets[] = '<link rel="stylesheet" href="' . $styleSheet . '" type="text/css" />';
 	}
 	
 	function insertPrintMediaStyleSheet($styleSheet)
