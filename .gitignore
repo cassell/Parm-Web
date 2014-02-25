@@ -1,6 +1,6 @@
 composer.lock
 vendor
-nbproject
+.idea/
 phpunit.xml.local
 tests/local_test.php
 tests/dao

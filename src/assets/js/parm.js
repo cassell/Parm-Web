@@ -1,4 +1,8 @@
 
+
+// drop a {{debug}} in your template and get a nice output to your console
+Handlebars.registerHelper("debug", function(optionalValue) {console.log("Current Context");console.log("====================");console.log(this);if (optionalValue) {console.log("Value");console.log("====================");console.log(optionalValue);}});
+
 (function($, window, document) {
 
 	$(function() {
@@ -161,19 +165,24 @@
 			}
 			
 		});
-		
-		
+
+		Parm.tableFunctionModel = function(data)
+		{
+			var model = {};
+			model.databaseName = data.databaseName;
+			model.tableName = data.tableName;
+			model.info = data.info;
+			return model;
+		};
+
+
 		Parm.CreationRoute = Ember.Route.extend({
 			
 			model: function(params) {
 				
 				return Ember.$.ajax("",Parm.getAjaxData('table',{'database' : params.databaseName,'table' : params.tableName })).then(function(data) {
-					
-					var model = {};
-					model.databaseName = data.databaseName;
-					model.tableName = data.tableName;
-					return model;
-					
+
+					return Parm.tableFunctionModel(data);
 				});
 				
 			},

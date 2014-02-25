@@ -133,7 +133,9 @@ class ParmWebInterface
 	
 	function returnTableInfo($databaseName,$tableName)
 	{
-		echo '{ "databaseName" : "' . $databaseName . '", "tableName" : "' . $tableName . '", "info" : {} }';
+		$tableData = $this->config[$databaseName]["generator"]->getTemplatingDataFromTableName($tableName);
+
+		echo '{ "databaseName" : "' . $databaseName . '", "tableName" : "' . $tableName . '", "info" : ' . self::toJSONString($tableData) . ' }';
 	}
 	
 	/**

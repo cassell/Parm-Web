@@ -1,11 +1,24 @@
 <script type="text/x-handlebars" data-template-name="creation">
-	
-	<h1>Table Options</h1>
-	<ol class="breadcrumb">
-		<li>{{#link-to "index"}}Databases{{/link-to}}</li>
-		<li>{{#link-to "database" databaseName}}{{databaseName}}{{/link-to}}</li>
-		<li>{{#link-to "table" this}}{{tableName}}{{/link-to}}</li>
-		<li class="active">Object Creation</li>
-	</ol>
+<h1>Table Options</h1>
+<ol class="breadcrumb">
+	<li>{{#link-to "index"}}Databases{{/link-to}}</li>
+	<li>{{#link-to "database" databaseName}}{{databaseName}}{{/link-to}}</li>
+	<li>{{#link-to "table" this}}{{tableName}}{{/link-to}}</li>
+	<li class="active">Object Creation</li>
+</ol>
+{{#with info}}
+<pre>
+// non extended object
+${{variableName}} = new {{className}}DaoObject();
+
+// extended object
+${{variableName}} = new {{className}}();
+
+// fields{{#each columns}}{{#if isPrimaryKey}}{{else}}${{../../variableName}}->set{{FieldCase}}($val);{{/if}}
+{{/each}}
+${{variableName}}->save();
+
+</pre>
+{{/with}}
 	
 </script>

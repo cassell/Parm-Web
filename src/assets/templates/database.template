@@ -9,9 +9,9 @@
 		{{#link-to "databaseGenerate" databaseName class="btn btn-default" style="margin-right:10px;"}}Generate Objects{{/link-to}}
 		<div style="display: inline-block; padding-right:10px;"></div>
 		<form class="parm-database-search" role="search" style="">
-			<div class="form-group" style="margin-bottom: 0;">
+			<!--<div class="form-group" style="margin-bottom: 0;">
 				<input type="text" class="form-control" placeholder="Search Tables">
-			</div>
+			</div>-->
 		</form>
 	</div>
 	<div class="list-group">
