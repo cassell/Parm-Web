@@ -9,25 +9,24 @@ abstract class HtmlPage
 	var $styleSheets = array();
 	
 	const FAVICON_PNG = '/img/favicon.png';
-	const TOUCH_ICON_PNG = '/img/msrc_touch_icon.png';
-	
+
 	// prototypes
 	abstract function open();
 	abstract function close();
 	
 	function insertScript($scriptName)
 	{
-		$this->scripts[] =  '<script src="' . substr($scriptName,0,-3) . PRODUCTION_RELEASE_NUMBER . '.js"></script>';
+		$this->scripts[] =  '<script src="' . $scriptName . '"></script>';
 	}
 	
 	function insertStyleSheet($styleSheet)
 	{
-		$this->styleSheets[] = '<link rel="stylesheet" href="' . substr($styleSheet,0,-4) . PRODUCTION_RELEASE_NUMBER . '.css" type="text/css" />';
+		$this->styleSheets[] = '<link rel="stylesheet" href="' . s$styleSheet . '" type="text/css" />';
 	}
 	
 	function insertPrintMediaStyleSheet($styleSheet)
 	{
-		$this->styleSheets[] = '<link rel="stylesheet" href="' . substr($styleSheet,0,-4) . PRODUCTION_RELEASE_NUMBER . '.css" type="text/css" media="print" />';
+		$this->styleSheets[] = '<link rel="stylesheet" href="' . $styleSheet . '" type="text/css" media="print" />';
 	}
 	
 	function insertJavaScriptBlock($block)

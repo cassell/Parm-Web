@@ -18,6 +18,6 @@
 		"parm/parm": "1.4.2"
 	},
 	"autoload": {
-		"psr-0": {"ParmWebInterface\\": "src/"}
+		"psr-0": {"ParmWebInterface": "src/"}
 	}
 }

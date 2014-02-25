@@ -315,41 +315,7 @@ Handlebars.registerHelper("debug", function(optionalValue) {console.log("Current
 
 		});
 		
-//
-//		Parm.ExtendedRoute = Ember.Route.extend({
-//
-//			model: function(params) {
-//
-//				return Ember.$.ajax("",Parm.getAjaxData('table',{'database' : params.databaseName,'table' : params.tableName })).then(function(data) {
-//
-//					var model = {};
-//					model.databaseName = data.databaseName;
-//					model.tableName = data.tableName;
-//					return model;
-//
-//				});
-//
-//			},
-//
-//			afterModel: function(model)
-//			{
-//				this.controllerFor('table').set("databaseName",model.databaseName);
-//				this.controllerFor('table').set("tableName",model.tableName);
-//			},
-//
-//			serialize: function(model) {
-//
-//				return { "databaseName" : model.databaseName, "tableName" : model.tableName };
-//			}
-//
-//		});
-		
-		
-		
-		
-		
-		
-		
+
 	});
 
 }(window.jQuery, window, document));
