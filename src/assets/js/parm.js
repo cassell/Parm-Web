@@ -34,8 +34,8 @@ Handlebars.registerHelper("debug", function(optionalValue) {console.log("Current
 					path: '/database/:databaseName/table/:tableName/structure'
 			});
 
-			this.route('extended', {
-					path: '/database/:databaseName/table/:tableName/extended'
+			this.route('extendedStub', {
+					path: '/database/:databaseName/table/:tableName/extendedStub'
 			});
 
 		});
@@ -265,35 +265,56 @@ Handlebars.registerHelper("debug", function(optionalValue) {console.log("Current
 			}
 
 		});
+
+		Parm.ExtendedStubController = Ember.ObjectController.extend({
+			databaseName: "",
+			tableName: "",
+			info: {}
+		});
+
+		Parm.ExtendedStubRoute = Ember.Route.extend({
+
+			model: function(params) {
+
+				return Ember.$.ajax("",Parm.getAjaxData('table',{'database' : params.databaseName,'table' : params.tableName })).then(function(data) {
+
+					var model = {};
+					model.databaseName = data.databaseName;
+					model.tableName = data.tableName;
+					model.info = data.info;
+					return model;
+				});
+
+			},
+
+			afterModel: function(model)
+			{
+				if(model.info != null)
+				{
+					this.controllerFor('extendedStub').set("databaseName",model.databaseName);
+					this.controllerFor('extendedStub').set("tableName",model.tableName);
+					this.controllerFor('extendedStub').set("info",model.info);
+				}
+				else
+				{
+					return this.model(model).then(function(model){
+
+						this.controllerFor('extendedStub').set("databaseName",model.databaseName);
+						this.controllerFor('extendedStub').set("tableName",model.tableName);
+						this.controllerFor('extendedStub').set("info",model.info);
+
+					}.bind(this));
+				}
+
+			},
+
+			serialize: function(model) {
+
+				return { "databaseName" : model.databaseName, "tableName" : model.tableName};
+			}
+
+		});
 		
-//		Parm.StructureRoute = Ember.Route.extend({
-//
-//			model: function(params) {
-//
-//				return Ember.$.ajax("",Parm.getAjaxData('table',{'database' : params.databaseName,'table' : params.tableName })).then(function(data) {
-//
-//					var model = {};
-//					model.databaseName = data.databaseName;
-//					model.tableName = data.tableName;
-//					model.info = data.info;
-//					return model;
-//
-//				});
-//
-//			},
-//
-//			afterModel: function(model)
-//			{
-//				this.controllerFor('table').set("databaseName",model.databaseName);
-//				this.controllerFor('table').set("tableName",model.tableName);
-//			},
-//
-//			serialize: function(model) {
-//
-//				return { "databaseName" : model.databaseName, "tableName" : model.tableName };
-//			}
-//
-//		});
 //
 //		Parm.ExtendedRoute = Ember.Route.extend({
 //

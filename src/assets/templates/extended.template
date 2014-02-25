@@ -1,11 +1,51 @@
-<script type="text/x-handlebars" data-template-name="extended">
+<script type="text/x-handlebars" data-template-name="extendedStub">
 	
 	<h1>Table Options</h1>
 	<ol class="breadcrumb">
 		<li>{{#link-to "index"}}Databases{{/link-to}}</li>
 		<li>{{#link-to "database" databaseName}}{{databaseName}}{{/link-to}}</li>
 		<li>{{#link-to "table" this}}{{tableName}}{{/link-to}}</li>
-		<li class="active">Extended Object Stub</li>
+		<li class="active">Extended Object Stubs</li>
 	</ol>
-	
+
+	{{#with info}}
+	<h3>Object</h3>
+	<pre>
+&lt;?php
+
+class {{className}} extends \\{{namespace}}\EmailDaoObject
+{
+	function __construct(Array $row = null)
+	{
+		parent::__construct($row);
+	}
+
+	static function getFactory(\Parm\DatabaseNode $databaseNode = null)
+	{
+		return new {{className}}Factory($databaseNode);
+	}
+
+}
+	</pre>
+	<h3>Factory</h3>
+	<pre>
+&lt;?php
+
+class {{className}}Factory extends \\{{namespace}}\EmailEmailDaoFactory
+{
+	function __construct(DatabaseNode $databaseNode = null)
+	{
+		parent::__construct($databaseNode);
+	}
+
+	function loadDataObject(Array $row = null)
+	{
+		return new {{className}}($row);
+	}
+
+}
+</pre>
+
+	{{/with}}
+
 </script>
