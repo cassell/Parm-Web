@@ -5,5 +5,5 @@
 PHP Active Record for MySQL -- PHP, AR, ORM, DAO, OMG!
 
 ## Giffy Demo:
-![Demo](http://imgur.com/vS1yGJp)
+![Demo](http://i.imgur.com/vS1yGJp.gif)
 
