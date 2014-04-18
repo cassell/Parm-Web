@@ -9,7 +9,7 @@
 	</ol>
 
 	{{#with info}}
-		<table class="table table-bordered" style="font-size:11px; background: #fff;">
+		<table class="table table-bordered table-striped table-responsive" style="font-size:11px; background: #fff;">
 			<thead>
 				<tr>
 					<th>Column</th>
