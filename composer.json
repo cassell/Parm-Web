@@ -1,5 +1,5 @@
 {
-	"name": "parm/parm-web-interface",
+	"name": "parm/parm-web",
 	"type": "library",
 	"description": "Active Record ORM with closures and web interface",
 	"keywords": ["active record", "activerecord", "orm", "closures", "dao", "database", "mysql"],
